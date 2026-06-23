@@ -1,0 +1,22 @@
+<app-modal title="Entrar" (close)="close.emit()">
+  <form (ngSubmit)="submit()">
+    <div class="field">
+      <label for="login-email">E-mail</label>
+      <input id="login-email" type="email" name="email" [(ngModel)]="email" required autocomplete="email" />
+    </div>
+
+    <div class="field">
+      <label for="login-password">Senha</label>
+      <input id="login-password" type="password" name="password" [(ngModel)]="password" required autocomplete="current-password" />
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block" [disabled]="loading()">
+      {{ loading() ? 'Entrando...' : 'Entrar' }}
+    </button>
+
+    <p class="switch-text">
+      Não tem conta?
+      <button type="button" class="link-btn" (click)="switchToRegister.emit()">Cadastre-se</button>
+    </p>
+  </form>
+</app-modal>

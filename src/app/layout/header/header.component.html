@@ -1,0 +1,44 @@
+<header class="topbar">
+  <div class="topbar-left">
+    <a routerLink="/" class="site-title">
+      <span class="logo-mark">&lt;/&gt;</span>
+      Galeria Dev
+    </a>
+  </div>
+
+  <div class="topbar-right">
+    <button
+      class="theme-switch"
+      type="button"
+      (click)="theme.toggle()"
+      [attr.aria-label]="theme.mode() === 'dark' ? 'Mudar para tema claro' : 'Mudar para tema escuro'">
+      {{ theme.mode() === 'dark' ? '🌙' : '☀️' }}
+    </button>
+
+    @if (auth.isLoggedIn()) {
+      <button class="btn btn-secondary" (click)="uploadClick.emit()">+ Enviar imagem</button>
+      <button class="btn btn-ghost" (click)="suggestCategoryClick.emit()">Sugerir categoria</button>
+      <button class="btn btn-ghost" (click)="suggestSubcategoryClick.emit()">Sugerir subcategoria</button>
+
+      <div class="user-area">
+        <button class="user-chip" (click)="toggleUserMenu()">
+          <span class="avatar">{{ auth.currentUser()?.username?.charAt(0)?.toUpperCase() }}</span>
+          {{ auth.currentUser()?.username }}
+        </button>
+
+        @if (userMenuOpen) {
+          <div class="user-menu">
+            <a routerLink="/perfil" (click)="userMenuOpen = false">Meu perfil</a>
+            @if (auth.isAdmin()) {
+              <a routerLink="/admin" (click)="userMenuOpen = false">Painel admin</a>
+            }
+            <button (click)="logout()">Sair</button>
+          </div>
+        }
+      </div>
+    } @else {
+      <button class="btn btn-ghost" (click)="loginClick.emit()">Entrar</button>
+      <button class="btn btn-primary" (click)="registerClick.emit()">Cadastrar</button>
+    }
+  </div>
+</header>

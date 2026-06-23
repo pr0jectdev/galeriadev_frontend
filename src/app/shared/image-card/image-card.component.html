@@ -1,0 +1,25 @@
+<article class="card">
+  <button class="thumb-btn" (click)="open.emit()">
+    <img [src]="thumbnailUrl" [alt]="image.title || 'Imagem'" loading="lazy" class="thumb" />
+    @if (image.status !== 'approved') {
+      <span class="badge" [class.badge-pending]="image.status === 'pending'" [class.badge-rejected]="image.status === 'rejected'">
+        {{ image.status === 'pending' ? 'Aguardando aprovação' : 'Rejeitada' }}
+      </span>
+    }
+  </button>
+
+  <div class="card-info">
+    <div class="card-tags">
+      <span class="tag">{{ image.categoryName }}</span>
+      <span class="tag tag-sub">{{ image.subcategoryName }}</span>
+    </div>
+
+    <div class="card-meta">
+      <span>{{ formattedDate }}</span>
+      <span>·</span>
+      <span>{{ image.clicks }} cliques</span>
+      <span>·</span>
+      <span>{{ formattedSize }}</span>
+    </div>
+  </div>
+</article>

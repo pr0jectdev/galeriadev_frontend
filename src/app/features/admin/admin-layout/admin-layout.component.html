@@ -1,0 +1,24 @@
+<div class="admin-layout">
+  <header class="admin-topbar">
+    <a routerLink="/" class="back-link">← Voltar ao site</a>
+    <h1>Painel Administrativo</h1>
+    <div class="admin-topbar-right">
+      <button class="theme-switch" (click)="theme.toggle()">{{ theme.mode() === 'dark' ? '🌙' : '☀️' }}</button>
+      <span class="admin-user">{{ auth.currentUser()?.username }}</span>
+    </div>
+  </header>
+
+  <div class="admin-body">
+    <nav class="admin-nav">
+      <a routerLink="/admin" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active">Dashboard</a>
+      <a routerLink="/admin/usuarios" routerLinkActive="active">Usuários</a>
+      <a routerLink="/admin/categorias" routerLinkActive="active">Categorias e subcategorias</a>
+      <a routerLink="/admin/uploads" routerLinkActive="active">Aprovação de imagens</a>
+      <a routerLink="/admin/sugestoes" routerLinkActive="active">Sugestões</a>
+    </nav>
+
+    <main class="admin-content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

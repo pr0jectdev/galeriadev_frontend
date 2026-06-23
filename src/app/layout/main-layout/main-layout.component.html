@@ -1,0 +1,32 @@
+<div class="layout">
+  <app-header
+    (loginClick)="open('login')"
+    (registerClick)="open('register')"
+    (uploadClick)="open('upload')"
+    (suggestCategoryClick)="open('suggest-category')"
+    (suggestSubcategoryClick)="open('suggest-subcategory')">
+  </app-header>
+
+  <div class="layout-body">
+    <app-sidebar></app-sidebar>
+    <main class="content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>
+
+@if (activeModal() === 'login') {
+  <app-login-modal (close)="close()" (switchToRegister)="switchToRegister()"></app-login-modal>
+}
+@if (activeModal() === 'register') {
+  <app-register-modal (close)="close()" (switchToLogin)="switchToLogin()"></app-register-modal>
+}
+@if (activeModal() === 'upload') {
+  <app-upload-modal (close)="close()"></app-upload-modal>
+}
+@if (activeModal() === 'suggest-category') {
+  <app-category-suggestion-modal (close)="close()"></app-category-suggestion-modal>
+}
+@if (activeModal() === 'suggest-subcategory') {
+  <app-subcategory-suggestion-modal (close)="close()"></app-subcategory-suggestion-modal>
+}

@@ -1,0 +1,48 @@
+<h2 class="page-title">Sugestões de categorias e subcategorias</h2>
+
+<h3 class="subsection-title">Categorias sugeridas</h3>
+<table class="admin-table">
+  <thead>
+    <tr><th>Nome</th><th>Sugerido por</th><th>Data</th><th>Ações</th></tr>
+  </thead>
+  <tbody>
+    @for (s of categorySuggestions(); track s.id) {
+      <tr>
+        <td>{{ s.name }}</td>
+        <td>{{ s.suggestedByUsername }}</td>
+        <td>{{ s.createdAt | date: 'dd/MM/yyyy' }}</td>
+        <td class="actions">
+          <button class="btn btn-secondary" (click)="reviewCategory(s.id, true)">Aprovar</button>
+          <button class="btn btn-danger" (click)="reviewCategory(s.id, false)">Rejeitar</button>
+        </td>
+      </tr>
+    }
+    @if (categorySuggestions().length === 0) {
+      <tr><td colspan="4" class="empty-row">Nenhuma sugestão pendente.</td></tr>
+    }
+  </tbody>
+</table>
+
+<h3 class="subsection-title">Subcategorias sugeridas</h3>
+<table class="admin-table">
+  <thead>
+    <tr><th>Nome</th><th>Categoria</th><th>Sugerido por</th><th>Data</th><th>Ações</th></tr>
+  </thead>
+  <tbody>
+    @for (s of subcategorySuggestions(); track s.id) {
+      <tr>
+        <td>{{ s.name }}</td>
+        <td>{{ s.categoryName }}</td>
+        <td>{{ s.suggestedByUsername }}</td>
+        <td>{{ s.createdAt | date: 'dd/MM/yyyy' }}</td>
+        <td class="actions">
+          <button class="btn btn-secondary" (click)="reviewSubcategory(s.id, true)">Aprovar</button>
+          <button class="btn btn-danger" (click)="reviewSubcategory(s.id, false)">Rejeitar</button>
+        </td>
+      </tr>
+    }
+    @if (subcategorySuggestions().length === 0) {
+      <tr><td colspan="5" class="empty-row">Nenhuma sugestão pendente.</td></tr>
+    }
+  </tbody>
+</table>

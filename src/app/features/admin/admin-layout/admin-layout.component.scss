@@ -1,0 +1,85 @@
+.admin-layout {
+  min-height: 100vh;
+  background: var(--color-bg);
+}
+
+.admin-topbar {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  padding: 0 var(--space-5);
+  background: var(--color-bg-elevated);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.back-link {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+
+.admin-topbar h1 {
+  font-size: 16px;
+  margin: 0;
+  flex: 1;
+}
+
+.admin-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.theme-switch {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+
+.admin-user {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.admin-body {
+  display: flex;
+}
+
+.admin-nav {
+  width: 220px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-5) var(--space-3);
+  border-right: 1px solid var(--color-border);
+  min-height: calc(100vh - 64px);
+}
+
+.admin-nav a {
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  margin-bottom: 2px;
+}
+
+.admin-nav a:hover {
+  background: var(--color-surface-hover);
+  color: var(--color-text-primary);
+}
+
+.admin-nav a.active {
+  background: var(--color-brand);
+  color: var(--color-text-on-brand);
+}
+
+.admin-content {
+  flex: 1;
+  padding: var(--space-5);
+  min-width: 0;
+}

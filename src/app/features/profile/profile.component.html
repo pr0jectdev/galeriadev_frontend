@@ -1,0 +1,15 @@
+<div class="profile-header">
+  <div class="avatar-lg">{{ auth.currentUser()?.username?.charAt(0)?.toUpperCase() }}</div>
+  <div>
+    <h1>{{ auth.currentUser()?.username }}</h1>
+    <p>{{ auth.currentUser()?.email }}</p>
+  </div>
+</div>
+
+<h2 class="section-title">Minhas imagens</h2>
+
+@if (loading()) {
+  <p class="loading-text">Carregando...</p>
+} @else {
+  <app-image-grid [images]="images()" emptyMessage="Você ainda não enviou nenhuma imagem."></app-image-grid>
+}

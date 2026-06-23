@@ -1,0 +1,12 @@
+<app-modal title="Sugerir nova categoria" (close)="close.emit()">
+  <form (ngSubmit)="submit()">
+    <div class="field">
+      <label for="suggest-cat-name">Nome da categoria</label>
+      <input id="suggest-cat-name" type="text" name="name" [(ngModel)]="name" placeholder="Ex: Python" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block" [disabled]="loading()">
+      {{ loading() ? 'Enviando...' : 'Enviar sugestão' }}
+    </button>
+  </form>
+</app-modal>

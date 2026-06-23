@@ -1,0 +1,38 @@
+<app-modal title="Enviar imagem" (close)="close.emit()">
+  <form (ngSubmit)="submit()">
+    <div class="field">
+      <label for="upload-category">Categoria</label>
+      <select id="upload-category" name="category" [(ngModel)]="categoryId" (ngModelChange)="subcategoryId = ''" required>
+        <option value="" disabled>Selecione...</option>
+        @for (category of categories(); track category.id) {
+          <option [value]="category.id">{{ category.name }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="upload-subcategory">Subcategoria</label>
+      <select id="upload-subcategory" name="subcategory" [(ngModel)]="subcategoryId" required [disabled]="!categoryId">
+        <option value="" disabled>Selecione...</option>
+        @for (sub of subcategories; track sub.id) {
+          <option [value]="sub.id">{{ sub.name }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="upload-title">Título (opcional)</label>
+      <input id="upload-title" type="text" name="title" [(ngModel)]="title" />
+    </div>
+
+    <div class="field">
+      <label for="upload-file">Arquivo de imagem</label>
+      <input id="upload-file" type="file" name="file" accept=".jpg,.jpeg,.png,.webp,.gif" (change)="onFileSelected($event)" required />
+      <span class="hint">Formatos aceitos: JPG, PNG, WEBP, GIF. O sistema gera automaticamente uma versão otimizada (thumbnail) para a galeria.</span>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block" [disabled]="loading()">
+      {{ loading() ? 'Enviando...' : 'Enviar imagem' }}
+    </button>
+  </form>
+</app-modal>

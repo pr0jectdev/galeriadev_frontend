@@ -1,0 +1,22 @@
+<div class="gallery-header">
+  <h1>Últimas imagens enviadas</h1>
+</div>
+
+@if (loading()) {
+  <p class="loading-text">Carregando imagens...</p>
+} @else {
+  <app-image-grid [images]="images()" emptyMessage="Nenhuma imagem aprovada por aqui ainda."></app-image-grid>
+
+  @if (totalPages > 1) {
+    <div class="pagination">
+      @for (p of pageNumbers(); track p) {
+        <button
+          class="page-btn"
+          [class.active]="page() === p"
+          (click)="goToPage(p)">
+          {{ p }}
+        </button>
+      }
+    </div>
+  }
+}

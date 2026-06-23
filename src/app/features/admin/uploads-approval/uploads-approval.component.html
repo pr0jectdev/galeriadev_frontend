@@ -1,0 +1,21 @@
+<h2 class="page-title">Imagens aguardando aprovação</h2>
+
+@if (pendingImages().length > 0) {
+  <div class="pending-grid">
+    @for (image of pendingImages(); track image.id) {
+      <div class="pending-card">
+        <img [src]="imageService.thumbnailUrl(image.id)" [alt]="image.title || 'Imagem'" />
+        <div class="pending-info">
+          <strong>{{ image.title || 'Sem título' }}</strong>
+          <span>{{ image.categoryName }} / {{ image.subcategoryName }}</span>
+          <div class="pending-actions">
+            <button class="btn btn-secondary" (click)="review(image.id, true)">Aprovar</button>
+            <button class="btn btn-danger" (click)="review(image.id, false)">Rejeitar</button>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+} @else {
+  <p class="empty-row">Nenhuma imagem aguardando aprovação.</p>
+}

@@ -1,0 +1,22 @@
+<app-modal title="Sugerir nova subcategoria" (close)="close.emit()">
+  <form (ngSubmit)="submit()">
+    <div class="field">
+      <label for="suggest-sub-category">Categoria</label>
+      <select id="suggest-sub-category" name="category" [(ngModel)]="categoryId" required>
+        <option value="" disabled>Selecione...</option>
+        @for (category of categories(); track category.id) {
+          <option [value]="category.id">{{ category.name }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="suggest-sub-name">Nome da subcategoria</label>
+      <input id="suggest-sub-name" type="text" name="name" [(ngModel)]="name" placeholder="Ex: Generics" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block" [disabled]="loading()">
+      {{ loading() ? 'Enviando...' : 'Enviar sugestão' }}
+    </button>
+  </form>
+</app-modal>

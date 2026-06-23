@@ -1,0 +1,43 @@
+<aside class="sidebar">
+  <h3 class="sidebar-title">Categorias</h3>
+
+  <nav class="category-list">
+    <a routerLink="/" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active" class="all-link">
+      Todas as imagens
+    </a>
+
+    @for (category of categories(); track category.id) {
+      <div class="category-group">
+        <button class="category-btn" (click)="toggle(category.id)">
+          <span class="chevron" [class.open]="expandedCategoryId() === category.id">›</span>
+          {{ category.name }}
+        </button>
+
+        @if (expandedCategoryId() === category.id && category.subcategories.length > 0) {
+          <div class="subcategory-list">
+            <a
+              [routerLink]="['/']"
+              [queryParams]="{ categoryId: category.id }"
+              routerLinkActive="active"
+              class="subcategory-link category-link">
+              Todas em {{ category.name }}
+            </a>
+            @for (sub of category.subcategories; track sub.id) {
+              <a
+                [routerLink]="['/']"
+                [queryParams]="{ categoryId: category.id, subcategoryId: sub.id }"
+                routerLinkActive="active"
+                class="subcategory-link">
+                {{ sub.name }}
+              </a>
+            }
+          </div>
+        }
+      </div>
+    }
+
+    @if (categories().length === 0) {
+      <p class="empty-hint">Nenhuma categoria cadastrada ainda.</p>
+    }
+  </nav>
+</aside>

@@ -1,0 +1,79 @@
+<div class="page-header">
+  <h2 class="page-title">Usuários</h2>
+  <button class="btn btn-primary" (click)="showCreateModal.set(true)">+ Novo usuário</button>
+</div>
+
+<div class="filters">
+  <button class="filter-btn" [class.active]="statusFilter() === ''" (click)="setFilter('')">Todos</button>
+  <button class="filter-btn" [class.active]="statusFilter() === 'pending'" (click)="setFilter('pending')">Pendentes</button>
+  <button class="filter-btn" [class.active]="statusFilter() === 'approved'" (click)="setFilter('approved')">Aprovados</button>
+  <button class="filter-btn" [class.active]="statusFilter() === 'rejected'" (click)="setFilter('rejected')">Rejeitados</button>
+</div>
+
+<table class="admin-table">
+  <thead>
+    <tr>
+      <th>Usuário</th>
+      <th>E-mail</th>
+      <th>Papel</th>
+      <th>Status</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (user of users(); track user.id) {
+      <tr>
+        <td>{{ user.username }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.role === 'admin' ? 'Administrador' : 'Usuário' }}</td>
+        <td>
+          <span class="badge" [class.badge-pending]="user.status === 'pending'" [class.badge-approved]="user.status === 'approved'" [class.badge-rejected]="user.status === 'rejected'">
+            {{ user.status === 'pending' ? 'Pendente' : user.status === 'approved' ? 'Aprovado' : 'Rejeitado' }}
+          </span>
+        </td>
+        <td class="actions">
+          @if (user.status !== 'approved') {
+            <button class="btn btn-secondary" (click)="approve(user.id)">Aprovar</button>
+          }
+          @if (user.status !== 'rejected') {
+            <button class="btn btn-ghost" (click)="reject(user.id)">Rejeitar</button>
+          }
+          <button class="btn btn-danger" (click)="remove(user.id)">Remover</button>
+        </td>
+      </tr>
+    }
+
+    @if (users().length === 0) {
+      <tr><td colspan="5" class="empty-row">Nenhum usuário encontrado.</td></tr>
+    }
+  </tbody>
+</table>
+
+@if (showCreateModal()) {
+  <app-modal title="Novo usuário" (close)="showCreateModal.set(false)">
+    <form (ngSubmit)="createUser()">
+      <div class="field">
+        <label for="new-username">Nome de usuário</label>
+        <input id="new-username" type="text" name="username" [(ngModel)]="newUsername" required />
+      </div>
+      <div class="field">
+        <label for="new-email">E-mail</label>
+        <input id="new-email" type="email" name="email" [(ngModel)]="newEmail" required />
+      </div>
+      <div class="field">
+        <label for="new-password">Senha</label>
+        <input id="new-password" type="password" name="password" [(ngModel)]="newPassword" required minlength="8" />
+      </div>
+      <div class="field">
+        <label for="new-role">Papel</label>
+        <select id="new-role" name="role" [(ngModel)]="newRole">
+          <option value="user">Usuário</option>
+          <option value="admin">Administrador</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block" [disabled]="creating()">
+        {{ creating() ? 'Criando...' : 'Criar usuário' }}
+      </button>
+    </form>
+  </app-modal>
+}

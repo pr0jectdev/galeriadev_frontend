@@ -1,0 +1,12 @@
+.subsection-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin: var(--space-6) 0 var(--space-3);
+}
+
+.subsection-title:first-of-type {
+  margin-top: 0;
+}

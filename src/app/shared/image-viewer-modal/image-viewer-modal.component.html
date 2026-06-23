@@ -1,0 +1,20 @@
+<div class="backdrop" (click)="close.emit()">
+  <div class="viewer" (click)="$event.stopPropagation()">
+    <button class="close-btn" (click)="close.emit()" aria-label="Fechar">✕</button>
+
+    @if (loading) {
+      <div class="loading">Carregando...</div>
+    } @else if (detail) {
+      <img [src]="fileUrl" [alt]="detail.title || 'Imagem'" class="full-image" />
+
+      <div class="viewer-footer">
+        <div class="info">
+          <strong>{{ detail.title || 'Sem título' }}</strong>
+          <span>{{ detail.categoryName }} / {{ detail.subcategoryName }}</span>
+          <span>{{ detail.width }}×{{ detail.height }}px · {{ formattedSize }} · {{ detail.clicks }} cliques</span>
+        </div>
+        <a class="btn btn-primary" [href]="fileUrl" download>Baixar imagem</a>
+      </div>
+    }
+  </div>
+</div>

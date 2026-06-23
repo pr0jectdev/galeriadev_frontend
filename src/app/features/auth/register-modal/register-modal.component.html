@@ -1,0 +1,28 @@
+<app-modal title="Criar conta" (close)="close.emit()">
+  <form (ngSubmit)="submit()">
+    <div class="field">
+      <label for="reg-username">Nome de usuário</label>
+      <input id="reg-username" type="text" name="username" [(ngModel)]="username" required autocomplete="username" />
+    </div>
+
+    <div class="field">
+      <label for="reg-email">E-mail</label>
+      <input id="reg-email" type="email" name="email" [(ngModel)]="email" required autocomplete="email" />
+    </div>
+
+    <div class="field">
+      <label for="reg-password">Senha</label>
+      <input id="reg-password" type="password" name="password" [(ngModel)]="password" required minlength="8" autocomplete="new-password" />
+      <span class="hint">Mínimo de 8 caracteres.</span>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block" [disabled]="loading()">
+      {{ loading() ? 'Cadastrando...' : 'Cadastrar' }}
+    </button>
+
+    <p class="switch-text">
+      Já tem conta?
+      <button type="button" class="link-btn" (click)="switchToLogin.emit()">Entrar</button>
+    </p>
+  </form>
+</app-modal>

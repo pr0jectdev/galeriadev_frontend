@@ -1,0 +1,42 @@
+<h2 class="page-title">Categorias e subcategorias</h2>
+
+<form class="new-category-form" (ngSubmit)="createCategory()">
+  <input type="text" name="newCategory" [(ngModel)]="newCategoryName" placeholder="Nome da nova categoria (ex: Python)" />
+  <button type="submit" class="btn btn-primary">+ Adicionar categoria</button>
+</form>
+
+<div class="category-cards">
+  @for (category of categories(); track category.id) {
+    <div class="category-card">
+      <div class="category-card-header">
+        <h3>{{ category.name }}</h3>
+        <button class="btn btn-danger" (click)="deleteCategory(category.id)">Remover categoria</button>
+      </div>
+
+      <ul class="subcategory-items">
+        @for (sub of category.subcategories; track sub.id) {
+          <li>
+            <span>{{ sub.name }}</span>
+            <button class="btn btn-ghost" (click)="deleteSubcategory(sub.id)">Remover</button>
+          </li>
+        }
+        @if (category.subcategories.length === 0) {
+          <li class="empty-sub">Nenhuma subcategoria cadastrada.</li>
+        }
+      </ul>
+
+      <form class="new-subcategory-form" (ngSubmit)="createSubcategory(category.id)">
+        <input
+          type="text"
+          [name]="'sub-' + category.id"
+          [(ngModel)]="subcategoryInputs[category.id]"
+          placeholder="Nova subcategoria" />
+        <button type="submit" class="btn btn-secondary">Adicionar</button>
+      </form>
+    </div>
+  }
+
+  @if (categories().length === 0) {
+    <p class="empty-row">Nenhuma categoria cadastrada ainda.</p>
+  }
+</div>

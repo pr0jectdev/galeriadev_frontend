@@ -1,0 +1,23 @@
+<h2 class="page-title">Visão geral</h2>
+
+<div class="cards">
+  <a routerLink="/admin/usuarios" class="summary-card">
+    <span class="number">{{ pendingUsers() }}</span>
+    <span class="label">Usuários aguardando aprovação</span>
+  </a>
+
+  <a routerLink="/admin/uploads" class="summary-card">
+    <span class="number">{{ pendingImages() }}</span>
+    <span class="label">Imagens aguardando aprovação</span>
+  </a>
+
+  <a routerLink="/admin/sugestoes" class="summary-card">
+    <span class="number">{{ pendingCategorySuggestions() }}</span>
+    <span class="label">Sugestões de categoria</span>
+  </a>
+
+  <a routerLink="/admin/sugestoes" class="summary-card">
+    <span class="number">{{ pendingSubcategorySuggestions() }}</span>
+    <span class="label">Sugestões de subcategoria</span>
+  </a>
+</div>
