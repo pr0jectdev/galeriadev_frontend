@@ -1,5 +1,26 @@
 <div class="gallery-header">
   <h1>Últimas imagens enviadas</h1>
+
+  <div class="debug-bar">
+    <button class="btn btn-ghost debug-btn" (click)="debugLogEnv()">
+      🔍 Log environment no console
+    </button>
+
+    <button class="btn btn-ghost debug-btn" (click)="debugShowUrl()">
+      🌐 Mostrar URL da API
+    </button>
+
+    <button class="btn btn-ghost debug-btn" (click)="debugTestApi()">
+      📡 Testar comunicação com a API
+    </button>
+  </div>
+
+  @if (debugApiUrl()) {
+    <p class="debug-result">🌐 API URL: <code>{{ debugApiUrl() }}</code></p>
+  }
+  @if (debugTestResult()) {
+    <p class="debug-result">{{ debugTestResult() }}</p>
+  }
 </div>
 
 @if (loading()) {
