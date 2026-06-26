@@ -5,8 +5,43 @@
 .gallery-header h1 {
   font-size: 22px;
   font-weight: 700;
-  margin: 0;
+  margin: 0 0 var(--space-3);
   color: var(--color-text-primary);
+}
+
+.debug-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+
+.debug-btn {
+  font-size: 12px;
+  padding: 6px 12px;
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  opacity: 0.75;
+}
+
+.debug-btn:hover {
+  opacity: 1;
+}
+
+.debug-result {
+  margin: var(--space-2) 0 0;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-3);
+  display: inline-block;
+}
+
+.debug-result code {
+  font-family: var(--font-mono);
+  color: var(--color-brand);
 }
 
 .loading-text {
